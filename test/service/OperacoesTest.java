@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import business.Operacoes;
 import model.Bar;
 import model.Cliente;
 import model.Pessoa;
@@ -29,14 +30,18 @@ public class OperacoesTest {
 	@Test
 	public void testNovoCliente() {
 		Pessoa p = new Cliente("João", "01425983057", 20, 'F');
-		Boolean added = this.op.novoCliente(p);
-		assertTrue(added);
+		Boolean added;
+		try {
+			added = this.op.novoCliente(p);
+			assertTrue(added);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	@Test
-	public void testNovoClienteNullFail() {
+	@Test(expected = Exception.class) 
+	public void testNovoClienteNullFail() throws Exception {
 		Boolean added = this.op.novoCliente(null);
-		assertFalse(added);
 	}
 
 }
